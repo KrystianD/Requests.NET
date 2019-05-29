@@ -9,7 +9,7 @@ namespace RequestsNET
 {
   internal static class Shared
   {
-    internal static readonly HttpClient httpClient = new HttpClient();
+    internal static readonly HttpClient HTTPClient = new HttpClient();
   }
 
   public static class Config

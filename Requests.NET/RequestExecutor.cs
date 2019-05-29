@@ -53,7 +53,7 @@ namespace RequestsNET
       // Perform the request
       var stopwatch = Stopwatch.StartNew();
       try {
-        var response = await Shared.httpClient.SendAsync(request, cts.Token).ConfigureAwait(false);
+        var response = await Shared.HTTPClient.SendAsync(request, cts.Token).ConfigureAwait(false);
 
         observer.OnSent(requestTag, requestData, request, stopwatch.Elapsed);
 
