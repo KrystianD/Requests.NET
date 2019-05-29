@@ -1,0 +1,28 @@
+dist: bionic
+language: csharp
+solution: Requests.NET.sln
+
+mono: none
+dotnet: 2.2
+
+services:
+  - docker
+
+before_install:
+  - docker run -d -p 9999:80 kennethreitz/httpbin
+
+stages:
+  - name: test
+  - name: deploy
+    if: branch = master
+
+jobs:
+  include:
+    - stage: test
+      script:
+        - dotnet build && dotnet test Requests.NET.Tests
+    - stage: deploy
+      script:
+        - dotnet pack -c Release &&
+          dotnet nuget push Requests.NET/bin/Release/*.nupkg -s https://nuget.org/ -k $NUGET_KEY &&
+          dotnet nuget push Requests.NET/bin/Release/*.nupkg -s https://nuget.kdsolutions.com/ -k $NUGET_KEY_KDS

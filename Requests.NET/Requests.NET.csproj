@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <RootNamespace>RequestsNET</RootNamespace>
+        <LangVersion>7.3</LangVersion>
+        <Version>0.1.2</Version>
+
+        <Title>Requests.NET</Title>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <Authors>Krystian Dużyński</Authors>
+        <PackageTags>generic repository</PackageTags>
+        <Copyright>Copyright © 2019 Krystian Dużyński</Copyright>
+        <Description>Fluent HTTP client with python-requests like interface</Description>
+        <NeutralLanguage>en</NeutralLanguage>
+        <RepositoryUrl>https://github.com/KrystianD/Requests.NET</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+        
+        <None Include="..\LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)" />
+    </ItemGroup>
+
+</Project>
