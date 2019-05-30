@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
@@ -49,6 +50,32 @@ namespace RequestsNET.Tests
                                .ToJsonAsync<HttpBinResponse>();
 
       CollectionAssert.AreEquivalent("abc", resp.Data);
+      
+      CollectionAssert.AreEquivalent(
+          new Dictionary<string, string>() {
+              ["Host"] = "localhost:9999",
+              ["Content-Length"] = "3",
+              ["Content-Type"] = "text/plain; charset=utf-8",
+          },
+          resp.Headers);
+    }
+
+    [Test]
+    public async Task StringEncoding()
+    {
+      var resp = await Requests.Post("http://localhost:9999/anything")
+                               .String("abc", Encoding.UTF32)
+                               .ToJsonAsync<HttpBinResponse>();
+
+      CollectionAssert.AreEquivalent("a\0\0\0b\0\0\0c\0\0\0", resp.Data);
+      
+      CollectionAssert.AreEquivalent(
+          new Dictionary<string, string>() {
+              ["Host"] = "localhost:9999",
+              ["Content-Length"] = "12",
+              ["Content-Type"] = "text/plain; charset=utf-32",
+          },
+          resp.Headers);
     }
 
     [Test]

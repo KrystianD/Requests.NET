@@ -122,17 +122,19 @@ namespace RequestsNET
       return this;
     }
 
-    public RequestBuilder Json(JToken data)
+    public RequestBuilder Json(JToken data, Encoding encoding = null)
     {
       CheckMode(RequestData.ModeEnum.Json);
       RequestData.JsonData = data;
+      RequestData.TextDataEncoding = encoding ?? Encoding.UTF8;
       return this;
     }
 
-    public RequestBuilder Json(object data)
+    public RequestBuilder Json(object data, Encoding encoding = null)
     {
       CheckMode(RequestData.ModeEnum.Json);
       RequestData.JsonData = JToken.FromObject(data);
+      RequestData.TextDataEncoding = encoding ?? Encoding.UTF8;
       return this;
     }
 
@@ -147,7 +149,7 @@ namespace RequestsNET
     {
       CheckMode(RequestData.ModeEnum.Text);
       RequestData.StringData = data;
-      RequestData.StringDataEncoding = encoding;
+      RequestData.TextDataEncoding = encoding ?? Encoding.UTF8;
       return this;
     }
 

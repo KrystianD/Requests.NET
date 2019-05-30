@@ -92,7 +92,7 @@ namespace RequestsNET.Tests
           new Dictionary<string, string>() {
               ["Host"] = "localhost:9999",
               ["Content-Length"] = "16",
-              ["Content-Type"] = "application/json; charset=us-ascii",
+              ["Content-Type"] = "application/json; charset=utf-8",
           },
           ht.Headers);
 

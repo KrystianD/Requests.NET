@@ -38,7 +38,7 @@ namespace RequestsNET
 
     public JToken JsonData = null;
     public string StringData = null;
-    public Encoding StringDataEncoding = null;
+    public Encoding TextDataEncoding = null;
     public byte[] BinaryData = null;
 
     public readonly List<FileDescriptor> Files = new List<FileDescriptor>();
