@@ -60,7 +60,7 @@ namespace RequestsNET
     public string ParseAsText()
     {
       if (_textCache == null) {
-        var charset = HttpResponse.Content.Headers.ContentType.CharSet;
+        var charset = HttpResponse.Content.Headers.ContentType?.CharSet;
         _textCache = charset == null
             ? Encoding.ASCII.GetString(Data)
             : Encoding.GetEncoding(charset).GetString(Data);
