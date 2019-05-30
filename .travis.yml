@@ -20,7 +20,8 @@ jobs:
   include:
     - stage: test
       script:
-        - dotnet build && dotnet test Requests.NET.Tests
+        - dotnet build &&
+          dotnet test Requests.NET.Tests
     - stage: deploy
       script:
         - dotnet pack -c Release &&

@@ -102,7 +102,7 @@ namespace RequestsNET
           request.Content = content;
           break;
         case RequestData.ModeEnum.Json:
-          request.Content = new StringContent(requestData.JsonData.ToString(), Encoding.ASCII, "application/json");
+          request.Content = new StringContent(requestData.JsonData.ToString(), Encoding.UTF8, "application/json");
           break;
         case RequestData.ModeEnum.Binary:
           request.Content = new ByteArrayContent(requestData.BinaryData);

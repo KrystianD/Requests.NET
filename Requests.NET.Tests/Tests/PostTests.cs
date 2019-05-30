@@ -65,6 +65,14 @@ namespace RequestsNET.Tests
                            .ToJsonAsync<HttpBinResponse>();
 
       Assert.AreEqual(JToken.FromObject(new { a = 1 }), resp.Json);
+      
+      CollectionAssert.AreEquivalent(
+          new Dictionary<string, string>() {
+              ["Host"] = "localhost:9999",
+              ["Content-Length"] = "12",
+              ["Content-Type"] = "application/json; charset=utf-8",
+          },
+          resp.Headers);
     }
   }
 }
