@@ -50,7 +50,8 @@ namespace RequestsNET
         case "application/octet-stream":
           break;
 
-        default:
+        case "text/plain":
+        case "text/html":
           ParseAsText();
           break;
       }
