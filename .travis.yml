@@ -24,6 +24,6 @@ jobs:
           dotnet test Requests.NET.Tests
     - stage: deploy
       script:
-        - dotnet pack -c Release &&
-          dotnet nuget push Requests.NET/bin/Release/*.nupkg -s https://nuget.org/ -k $NUGET_KEY &&
-          dotnet nuget push Requests.NET/bin/Release/*.nupkg -s https://nuget.kdsolutions.com/ -k $NUGET_KEY_KDS
+        - dotnet pack -c Release
+        - dotnet nuget push Requests.NET/bin/Release/*.nupkg -s https://nuget.org/ -k $NUGET_KEY || true
+        - dotnet nuget push Requests.NET/bin/Release/*.nupkg -s https://nuget.kdsolutions.com/ -k $NUGET_KEY_KDS || true
