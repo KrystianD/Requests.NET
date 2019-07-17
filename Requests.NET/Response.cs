@@ -40,6 +40,7 @@ namespace RequestsNET
 
       switch (ContentType) {
         case "application/json":
+        case "application/vnd.api+json":
           ParseAsJson();
           break;
 

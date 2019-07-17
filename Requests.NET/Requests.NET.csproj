@@ -4,7 +4,7 @@
         <TargetFramework>netstandard2.0</TargetFramework>
         <RootNamespace>RequestsNET</RootNamespace>
         <LangVersion>7.3</LangVersion>
-        <Version>0.1.6</Version>
+        <Version>0.1.6.1</Version>
 
         <Title>Requests.NET</Title>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -22,6 +22,12 @@
         <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
         
         <None Include="..\LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\README.md">
+        <Link>README.md</Link>
+      </Content>
     </ItemGroup>
 
 </Project>
