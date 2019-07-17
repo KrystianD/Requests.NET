@@ -40,6 +40,7 @@ namespace RequestsNET
     public string StringData = null;
     public Encoding TextDataEncoding = null;
     public byte[] BinaryData = null;
+    public string OverrideContentType = null;
 
     public readonly List<FileDescriptor> Files = new List<FileDescriptor>();
   }

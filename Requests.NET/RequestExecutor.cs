@@ -102,14 +102,18 @@ namespace RequestsNET
           request.Content = content;
           break;
         case RequestData.ModeEnum.Json:
-          request.Content = new StringContent(requestData.JsonData.ToString(), requestData.TextDataEncoding, "application/json");
+          request.Content = new StringContent(requestData.JsonData.ToString(),
+                                              requestData.TextDataEncoding,
+                                              requestData.OverrideContentType ?? "application/json");
           break;
         case RequestData.ModeEnum.Binary:
           request.Content = new ByteArrayContent(requestData.BinaryData);
-          request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+          request.Content.Headers.ContentType = new MediaTypeHeaderValue(requestData.OverrideContentType ?? "application/octet-stream");
           break;
         case RequestData.ModeEnum.Text:
-          request.Content = new StringContent(requestData.StringData, requestData.TextDataEncoding, "text/plain");
+          request.Content = new StringContent(requestData.StringData,
+                                              requestData.TextDataEncoding,
+                                              requestData.OverrideContentType ?? "text/plain");
           break;
       }
     }

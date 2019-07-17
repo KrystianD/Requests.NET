@@ -122,34 +122,38 @@ namespace RequestsNET
       return this;
     }
 
-    public RequestBuilder Json(JToken data, Encoding encoding = null)
+    public RequestBuilder Json(JToken data, Encoding encoding = null, string contentType = null)
     {
       CheckMode(RequestData.ModeEnum.Json);
       RequestData.JsonData = data;
       RequestData.TextDataEncoding = encoding ?? Encoding.UTF8;
+      RequestData.OverrideContentType = contentType;
       return this;
     }
 
-    public RequestBuilder Json(object data, Encoding encoding = null)
+    public RequestBuilder Json(object data, Encoding encoding = null, string contentType = null)
     {
       CheckMode(RequestData.ModeEnum.Json);
       RequestData.JsonData = JToken.FromObject(data);
       RequestData.TextDataEncoding = encoding ?? Encoding.UTF8;
+      RequestData.OverrideContentType = contentType;
       return this;
     }
 
-    public RequestBuilder Binary(byte[] data)
+    public RequestBuilder Binary(byte[] data, string contentType = null)
     {
       CheckMode(RequestData.ModeEnum.Binary);
       RequestData.BinaryData = data;
+      RequestData.OverrideContentType = contentType;
       return this;
     }
 
-    public RequestBuilder String(string data, Encoding encoding = null)
+    public RequestBuilder String(string data, Encoding encoding = null, string contentType = null)
     {
       CheckMode(RequestData.ModeEnum.Text);
       RequestData.StringData = data;
       RequestData.TextDataEncoding = encoding ?? Encoding.UTF8;
+      RequestData.OverrideContentType = contentType;
       return this;
     }
 

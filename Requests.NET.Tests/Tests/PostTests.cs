@@ -43,6 +43,22 @@ namespace RequestsNET.Tests
     }
 
     [Test]
+    public async Task BinaryContentType()
+    {
+      var resp = await Requests.Post("http://localhost:9999/anything")
+                               .Binary(new byte[] { 97, 98, 99 }, contentType: "text/custom")
+                               .ToJsonAsync<HttpBinResponse>();
+
+      CollectionAssert.AreEquivalent(
+          new Dictionary<string, string>() {
+              ["Host"] = "localhost:9999",
+              ["Content-Length"] = "3",
+              ["Content-Type"] = "text/custom",
+          },
+          resp.Headers);
+    }
+
+    [Test]
     public async Task String()
     {
       var resp = await Requests.Post("http://localhost:9999/anything")
@@ -50,7 +66,7 @@ namespace RequestsNET.Tests
                                .ToJsonAsync<HttpBinResponse>();
 
       CollectionAssert.AreEquivalent("abc", resp.Data);
-      
+
       CollectionAssert.AreEquivalent(
           new Dictionary<string, string>() {
               ["Host"] = "localhost:9999",
@@ -68,12 +84,28 @@ namespace RequestsNET.Tests
                                .ToJsonAsync<HttpBinResponse>();
 
       CollectionAssert.AreEquivalent("a\0\0\0b\0\0\0c\0\0\0", resp.Data);
-      
+
       CollectionAssert.AreEquivalent(
           new Dictionary<string, string>() {
               ["Host"] = "localhost:9999",
               ["Content-Length"] = "12",
               ["Content-Type"] = "text/plain; charset=utf-32",
+          },
+          resp.Headers);
+    }
+
+    [Test]
+    public async Task StringContentType()
+    {
+      var resp = await Requests.Post("http://localhost:9999/anything")
+                               .String("abc", contentType: "text/custom")
+                               .ToJsonAsync<HttpBinResponse>();
+
+      CollectionAssert.AreEquivalent(
+          new Dictionary<string, string>() {
+              ["Host"] = "localhost:9999",
+              ["Content-Length"] = "3",
+              ["Content-Type"] = "text/custom; charset=utf-8",
           },
           resp.Headers);
     }
@@ -92,12 +124,28 @@ namespace RequestsNET.Tests
                            .ToJsonAsync<HttpBinResponse>();
 
       Assert.AreEqual(JToken.FromObject(new { a = 1 }), resp.Json);
-      
+
       CollectionAssert.AreEquivalent(
           new Dictionary<string, string>() {
               ["Host"] = "localhost:9999",
               ["Content-Length"] = "12",
               ["Content-Type"] = "application/json; charset=utf-8",
+          },
+          resp.Headers);
+    }
+
+    [Test]
+    public async Task JsonCustomType()
+    {
+      var resp = await Requests.Post("http://localhost:9999/anything")
+                               .Json(JToken.FromObject(new { a = 1 }), contentType: "text/custom")
+                               .ToJsonAsync<HttpBinResponse>();
+
+      CollectionAssert.AreEquivalent(
+          new Dictionary<string, string>() {
+              ["Host"] = "localhost:9999",
+              ["Content-Length"] = "12",
+              ["Content-Type"] = "text/custom; charset=utf-8",
           },
           resp.Headers);
     }
