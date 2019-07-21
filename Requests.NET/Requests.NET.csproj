@@ -19,10 +19,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Newtonsoft.Json" Version="12.0.2"/>
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
 
-        <None Include="..\LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)"/>
-        <None Include="..\README.md" Pack="false"/>
+        <None Include="..\LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)" />
+        <None Include="..\README.md" Pack="false" />
     </ItemGroup>
 
 </Project>
