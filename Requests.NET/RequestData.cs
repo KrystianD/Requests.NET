@@ -25,6 +25,8 @@ namespace RequestsNET
       public byte[] Data;
       public Stream Stream;
     }
+    
+    public bool ValidateRequest = false;
 
     public HttpMethod Method;
     public string Url;
