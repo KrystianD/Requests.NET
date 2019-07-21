@@ -34,6 +34,8 @@ namespace RequestsNET
                                           IRequestObserver observer = null)
     {
       var resp = await RequestExecutor.ExecuteAsync(RequestData, timeout, cancellationToken, observer);
+      if (resp.Json is null)
+        throw new NoResponseException();
       return resp.Json;
     }
 
