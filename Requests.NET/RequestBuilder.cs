@@ -16,6 +16,14 @@ namespace RequestsNET
   {
   }
 
+  public class RequestFailedException : Exception
+  {
+    public RequestFailedException(int code)
+        : base($"request failed with code: {code}")
+    {
+    }
+  }
+
   public class BaseRequestBuilder
   {
     protected readonly RequestData RequestData = new RequestData();
@@ -56,6 +64,12 @@ namespace RequestsNET
     {
       RequestData.Method = method;
       RequestData.Url = url;
+    }
+
+    public RequestBuilder ValidateRequest()
+    {
+      RequestData.ValidateRequest = true;
+      return this;
     }
 
     public RequestBuilder Header(string name, string value)
@@ -204,6 +218,12 @@ namespace RequestsNET
     {
       RequestData.Method = method;
       RequestData.Url = url;
+    }
+
+    public SendOnlyRequestBuilder ValidateRequest()
+    {
+      RequestData.ValidateRequest = true;
+      return this;
     }
 
     public SendOnlyRequestBuilder Header(string name, string value)
