@@ -4,7 +4,7 @@
         <TargetFramework>netstandard2.0</TargetFramework>
         <RootNamespace>RequestsNET</RootNamespace>
         <LangVersion>7.3</LangVersion>
-        <Version>0.1.7</Version>
+        <Version>0.1.7.1</Version>
 
         <Title>Requests.NET</Title>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -20,14 +20,9 @@
 
     <ItemGroup>
         <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-        
-        <None Include="..\LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)" />
-    </ItemGroup>
 
-    <ItemGroup>
-      <Content Include="..\README.md">
-        <Link>README.md</Link>
-      </Content>
+        <None Include="..\LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)" />
+        <None Include="..\README.md" Pack="false" />
     </ItemGroup>
 
 </Project>
