@@ -56,6 +56,14 @@ namespace RequestsNET
         throw new NoResponseException();
       return resp.Json.ToObject<T>();
     }
+
+    public async Task<byte[]> ToBinaryAsync(TimeSpan? timeout = null,
+                                            CancellationToken cancellationToken = default,
+                                            IRequestObserver observer = null)
+    {
+      var resp = await RequestExecutor.ExecuteAsync(RequestData, timeout, cancellationToken, observer);
+      return resp.Data;
+    }
   }
 
   public class RequestBuilder : BaseRequestBuilder

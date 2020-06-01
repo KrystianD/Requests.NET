@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
@@ -22,6 +21,12 @@ namespace RequestsNET.Tests
       var fmt = resp.FormatResponse();
 
       Assert.AreEqual("<binary:5>", fmt);
+
+      var resp2 = await Requests.Get("http://localhost:9999/bytes/5")
+                                .Parameter("seed", "1")
+                                .ToBinaryAsync();
+
+      Assert.AreEqual(new byte[] { 68, 32, 130, 60, 253 }, resp2);
     }
 
     [Test]
