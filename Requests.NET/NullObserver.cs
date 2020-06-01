@@ -10,28 +10,16 @@ namespace RequestsNET
       return null;
     }
 
-    public void BeforeSent(object tag, RequestData requestData, HttpRequestMessage request)
-    {
-    }
+    public void BeforeSent(object tag, RequestData requestData, HttpRequestMessage request) { }
 
-    public void OnSent(object tag, RequestData requestData, HttpRequestMessage request, TimeSpan elapsed)
-    {
-    }
+    public void OnSent(object tag, RequestData requestData, HttpRequestMessage request, TimeSpan elapsed) { }
 
-    public void OnReceived(object tag, RequestData requestData, HttpRequestMessage request, TimeSpan elapsed, Response resp)
-    {
-    }
+    public void OnReceived(object tag, RequestData requestData, HttpRequestMessage request, TimeSpan elapsed, Response resp) { }
 
-    public void OnTimeout(object tag, RequestData requestData, HttpRequestMessage request, TimeSpan elapsed)
-    {
-    }
+    public void OnTimeout(object tag, RequestData requestData, HttpRequestMessage request, TimeSpan elapsed) { }
 
-    public void OnCancelled(object tag, RequestData requestData, HttpRequestMessage request, TimeSpan elapsed)
-    {
-    }
+    public void OnCancelled(object tag, RequestData requestData, HttpRequestMessage request, TimeSpan elapsed) { }
 
-    public void OnFailed(object tag, RequestData requestData, HttpRequestMessage request, TimeSpan elapsed, Exception exception)
-    {
-    }
+    public void OnFailed(object tag, RequestData requestData, HttpRequestMessage request, TimeSpan elapsed, Exception exception) { }
   }
 }

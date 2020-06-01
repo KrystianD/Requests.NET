@@ -11,10 +11,10 @@ namespace RequestsNET.Tests
     public async Task Get()
     {
       var resp = await Requests.GetAsync("http://localhost:9999/get?p1=v1",
-                                    parameters: new Dictionary<string, string>() { ["p1"] = "v1" },
-                                    headers: new Dictionary<string, string>() { ["h2"] = "v2" },
-                                    authUser: "user",
-                                    authPass: "pass");
+                                         parameters: new Dictionary<string, string>() { ["p1"] = "v1" },
+                                         headers: new Dictionary<string, string>() { ["h2"] = "v2" },
+                                         authUser: "user",
+                                         authPass: "pass");
 
       var httpbinData = resp.Json.ToObject<HttpBinResponse>();
 
@@ -49,9 +49,9 @@ namespace RequestsNET.Tests
     public async Task PostForm()
     {
       var resp = await Requests.PostAsync("http://localhost:9999/post",
-                                     data: new Dictionary<string, string>() {
-                                         ["f1"] = "v1",
-                                     }
+                                          data: new Dictionary<string, string>() {
+                                              ["f1"] = "v1",
+                                          }
       );
 
       var ht = resp.Json.ToObject<HttpBinResponse>();
@@ -78,9 +78,9 @@ namespace RequestsNET.Tests
     public async Task PostJson()
     {
       var resp = await Requests.PostAsync("http://localhost:9999/post",
-                                     json: JToken.FromObject(new {
-                                         f1 = "v2",
-                                     })
+                                          json: JToken.FromObject(new {
+                                              f1 = "v2",
+                                          })
       );
 
       var ht = resp.Json.ToObject<HttpBinResponse>();

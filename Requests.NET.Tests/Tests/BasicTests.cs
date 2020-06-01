@@ -11,10 +11,10 @@ namespace RequestsNET.Tests
     {
       var resp = await Requests.Head("http://localhost:9999/anything")
                                .ExecuteAsync();
-      
+
       Assert.AreEqual(HttpStatusCode.OK, resp.StatusCode);
     }
-    
+
     [Test]
     public async Task Get()
     {
@@ -56,7 +56,7 @@ namespace RequestsNET.Tests
     {
       var resp = await Requests.Options("http://localhost:9999/anything")
                                .ExecuteAsync();
-      
+
       Assert.AreEqual(HttpStatusCode.OK, resp.StatusCode);
     }
   }

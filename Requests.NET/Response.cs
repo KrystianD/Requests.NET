@@ -24,7 +24,7 @@ namespace RequestsNET
     {
       get
       {
-        var codeGroup = (int) StatusCode / 100;
+        var codeGroup = (int)StatusCode / 100;
         return codeGroup == 2 || codeGroup == 3;
       }
     }

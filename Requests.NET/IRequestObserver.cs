@@ -12,9 +12,9 @@ namespace RequestsNET
                     HttpRequestMessage request);
 
     void OnSent(object tag,
-                   RequestData requestData,
-                   HttpRequestMessage request,
-                   TimeSpan elapsed);
+                RequestData requestData,
+                HttpRequestMessage request,
+                TimeSpan elapsed);
 
     void OnReceived(object tag,
                     RequestData requestData,

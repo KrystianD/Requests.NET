@@ -12,16 +12,12 @@ using Newtonsoft.Json.Linq;
 
 namespace RequestsNET
 {
-  public class NoResponseException : Exception
-  {
-  }
+  public class NoResponseException : Exception { }
 
   public class RequestFailedException : Exception
   {
     public RequestFailedException(int code)
-        : base($"request failed with code: {code}")
-    {
-    }
+        : base($"request failed with code: {code}") { }
   }
 
   public class BaseRequestBuilder
