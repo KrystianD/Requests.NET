@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 
 namespace RequestsNET.Tests
 {
@@ -10,6 +11,21 @@ namespace RequestsNET.Tests
       Assert.ThrowsAsync<RequestFailedException>(
           () => Requests.Get("http://localhost:9999/status/404")
                         .ValidateRequest()
+                        .ExecuteAsync());
+
+      Assert.ThrowsAsync<RequestFailedException>(
+          () => Requests.Post("http://localhost:9999/status/404")
+                        .ValidateRequest()
+                        .ExecuteAsync());
+    }
+
+    [Test]
+    public void MixedModeErrorTest()
+    {
+      Assert.ThrowsAsync<ArgumentException>(
+          () => Requests.Post("http://localhost:9999/post")
+                        .File("file", "content" , "W")
+                        .String("txt")
                         .ExecuteAsync());
     }
   }

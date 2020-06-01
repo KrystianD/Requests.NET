@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Newtonsoft.Json.Linq;
+using NUnit.Framework;
 
 namespace RequestsNET.Tests
 {
@@ -16,6 +17,7 @@ namespace RequestsNET.Tests
     public void NoResponse()
     {
       Assert.ThrowsAsync<NoResponseException>(() => Requests.Post("http://localhost:9999/get").ToJsonAsync<string>());
+      Assert.ThrowsAsync<NoResponseException>(() => Requests.Post("http://localhost:9999/get").ToJsonAsync());
     }
   }
 }
