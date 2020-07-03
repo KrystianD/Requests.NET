@@ -1,11 +1,13 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace RequestsNET
 {
@@ -22,6 +24,14 @@ namespace RequestsNET
       // Headers
       foreach (var keyValuePair in requestData.Headers.AsEnumerable())
         request.Headers.Add(keyValuePair.Key, keyValuePair.Value);
+
+      // Cookies
+      if (requestData.Cookies.Count > 0) {
+        request.Headers.Add("Cookie", string.Join(
+                                "; ",
+                                requestData.Cookies
+                                           .Select(x => $"{HttpUtility.UrlEncode(x.Key)}={HttpUtility.UrlEncode(x.Value)}")));
+      }
 
       // Data
       SetupData(requestData, request);

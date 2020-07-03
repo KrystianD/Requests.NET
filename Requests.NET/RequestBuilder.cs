@@ -95,6 +95,19 @@ namespace RequestsNET
       return this;
     }
 
+    public RequestBuilder Cookie(string name, string value)
+    {
+      RequestData.Cookies[name] = value;
+      return this;
+    }
+
+    public RequestBuilder Cookie(IDictionary<string, string> cookies)
+    {
+      foreach (var keyValuePair in cookies)
+        RequestData.Cookies.Add(keyValuePair.Key, keyValuePair.Value);
+      return this;
+    }
+
     public RequestBuilder AuthBasic(string user, string password)
     {
       var authB64 = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{user}:{password}"));
@@ -246,6 +259,19 @@ namespace RequestsNET
     {
       foreach (var keyValuePair in headers)
         RequestData.Headers.Add(keyValuePair.Key, keyValuePair.Value);
+      return this;
+    }
+
+    public SendOnlyRequestBuilder Cookie(string name, string value)
+    {
+      RequestData.Cookies[name] = value;
+      return this;
+    }
+
+    public SendOnlyRequestBuilder Cookie(IDictionary<string, string> cookies)
+    {
+      foreach (var keyValuePair in cookies)
+        RequestData.Cookies.Add(keyValuePair.Key, keyValuePair.Value);
       return this;
     }
 

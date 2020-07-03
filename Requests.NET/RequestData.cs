@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Web;
 using Newtonsoft.Json.Linq;
 
 namespace RequestsNET
@@ -33,6 +35,7 @@ namespace RequestsNET
     public AuthenticationHeaderValue Auth;
     public readonly HttpRequestHeaders Headers = new HttpRequestMessage().Headers;
     public readonly IDictionary<string, string> Parameters = new Dictionary<string, string>();
+    public readonly Dictionary<string, string> Cookies = new Dictionary<string, string>();
 
     public ModeEnum Mode = ModeEnum.Unknown;
 
