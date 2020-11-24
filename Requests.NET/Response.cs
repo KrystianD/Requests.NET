@@ -73,7 +73,7 @@ namespace RequestsNET
     public JToken ParseAsJson()
     {
       if (_jsonCache == null) {
-        _jsonCache = Newtonsoft.Json.JsonConvert.DeserializeObject<JToken>(Encoding.ASCII.GetString(Data));
+        _jsonCache = Newtonsoft.Json.JsonConvert.DeserializeObject<JToken>(ParseAsText());
       }
 
       return _jsonCache;
