@@ -50,7 +50,7 @@ namespace RequestsNET
       var resp = await RequestExecutor.ExecuteAsync(RequestData, timeout, cancellationToken, observer);
       if (resp.Data is null || resp.Data.Length == 0)
         throw new NoResponseException();
-      return resp.ParseAsJson().ToObject<T>();
+      return resp.ParseAsJson().ToObject<T>(Utils.JsonDeserializer);
     }
 
     public async Task<byte[]> ToBinaryAsync(TimeSpan? timeout = null,
