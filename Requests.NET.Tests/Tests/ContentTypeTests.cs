@@ -54,6 +54,11 @@ namespace RequestsNET.Tests
       var fmt = resp.FormatResponse();
 
       Assert.AreEqual("test", fmt);
+
+      var textData = await Requests.Get($"http://localhost:9999/base64/{data}")
+                                   .ToTextAsync();
+
+      Assert.AreEqual("test", textData);
     }
 
     [Test]

@@ -60,6 +60,14 @@ namespace RequestsNET
       var resp = await RequestExecutor.ExecuteAsync(RequestData, timeout, cancellationToken, observer);
       return resp.Data;
     }
+
+    public async Task<string> ToTextAsync(TimeSpan? timeout = null,
+                                          CancellationToken cancellationToken = default,
+                                          IRequestObserver observer = null)
+    {
+      var resp = await RequestExecutor.ExecuteAsync(RequestData, timeout, cancellationToken, observer);
+      return resp.ParseAsText();
+    }
   }
 
   public class RequestBuilder : BaseRequestBuilder
