@@ -38,9 +38,9 @@ namespace RequestsNET
                                           IRequestObserver observer = null)
     {
       var resp = await RequestExecutor.ExecuteAsync(RequestData, timeout, cancellationToken, observer);
-      if (resp.Json is null)
+      if (resp.Data is null || resp.Data.Length == 0)
         throw new NoResponseException();
-      return resp.Json;
+      return resp.ParseAsJson();
     }
 
     public async Task<T> ToJsonAsync<T>(TimeSpan? timeout = null,
@@ -48,9 +48,9 @@ namespace RequestsNET
                                         IRequestObserver observer = null)
     {
       var resp = await RequestExecutor.ExecuteAsync(RequestData, timeout, cancellationToken, observer);
-      if (resp.Json is null)
+      if (resp.Data is null || resp.Data.Length == 0)
         throw new NoResponseException();
-      return resp.Json.ToObject<T>();
+      return resp.ParseAsJson().ToObject<T>();
     }
 
     public async Task<byte[]> ToBinaryAsync(TimeSpan? timeout = null,

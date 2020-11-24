@@ -16,8 +16,8 @@ namespace RequestsNET.Tests
     [Test]
     public void NoResponse()
     {
-      Assert.ThrowsAsync<NoResponseException>(() => Requests.Post("http://localhost:9999/get").ToJsonAsync<string>());
-      Assert.ThrowsAsync<NoResponseException>(() => Requests.Post("http://localhost:9999/get").ToJsonAsync());
+      Assert.ThrowsAsync<NoResponseException>(() => Requests.Post("http://localhost:9999/status/404").ToJsonAsync<string>());
+      Assert.ThrowsAsync<NoResponseException>(() => Requests.Post("http://localhost:9999/status/404").ToJsonAsync());
     }
   }
 }
