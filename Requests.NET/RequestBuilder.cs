@@ -27,6 +27,7 @@ namespace RequestsNET
 
   public class BaseRequestBuilder
   {
+    protected readonly HttpClientConfig HttpConfig = new HttpClientConfig();
     protected readonly RequestData RequestData = new RequestData();
 
     public HttpRequestMessage BuildRequest() => RequestExecutor.BuildRequest(RequestData);
@@ -35,7 +36,7 @@ namespace RequestsNET
                                        CancellationToken cancellationToken = default,
                                        IRequestObserver observer = null)
     {
-      return RequestExecutor.ExecuteAsync(RequestData, timeout, cancellationToken, observer);
+      return RequestExecutor.ExecuteAsync(HttpConfig, RequestData, timeout, cancellationToken, observer);
     }
 
     public async Task<JToken> ToJsonAsync(TimeSpan? timeout = null,
@@ -96,6 +97,12 @@ namespace RequestsNET
     public RequestBuilder ValidateRequest()
     {
       RequestData.ValidateRequest = true;
+      return this;
+    }
+
+    public RequestBuilder FollowRedirects(bool followRedirects = true)
+    {
+      HttpConfig.FollowRedirects = followRedirects;
       return this;
     }
 
@@ -263,6 +270,12 @@ namespace RequestsNET
     public SendOnlyRequestBuilder ValidateRequest()
     {
       RequestData.ValidateRequest = true;
+      return this;
+    }
+
+    public SendOnlyRequestBuilder FollowRedirects(bool followRedirects = true)
+    {
+      HttpConfig.FollowRedirects = followRedirects;
       return this;
     }
 

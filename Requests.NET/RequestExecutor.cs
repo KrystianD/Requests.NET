@@ -39,11 +39,11 @@ namespace RequestsNET
       return request;
     }
 
-    public static async Task<Response> ExecuteAsync(
-        RequestData requestData,
-        TimeSpan? timeout = null,
-        CancellationToken cancellationToken = default,
-        IRequestObserver observer = null)
+    public static async Task<Response> ExecuteAsync(HttpClientConfig httpClientConfig,
+                                                    RequestData requestData,
+                                                    TimeSpan? timeout = null,
+                                                    CancellationToken cancellationToken = default,
+                                                    IRequestObserver observer = null)
     {
       observer = observer ?? Config.DefaultObserver;
       timeout = timeout ?? Config.DefaultTimeout;
@@ -63,7 +63,8 @@ namespace RequestsNET
       // Perform the request
       var stopwatch = Stopwatch.StartNew();
       try {
-        var response = await Shared.HTTPClient.SendAsync(request, cts.Token).ConfigureAwait(false);
+        var httpClient = Shared.GetHttpClient(httpClientConfig);
+        var response = await httpClient.SendAsync(request, cts.Token).ConfigureAwait(false);
 
         observer.OnSent(requestTag, requestData, request, stopwatch.Elapsed);
 

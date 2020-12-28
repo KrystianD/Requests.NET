@@ -8,6 +8,7 @@ Fluent C# HTTP client
 HttpBinResponse resp = await Requests.Get("https://httpbin.org/get")
                                      .AuthBasic("user", "pass")
                                      .Parameter("param1", "value1")
+                                     .FollowRedirects()
                                      .ToJsonAsync<HttpBinResponse>();
 ```
 
