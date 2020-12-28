@@ -7,11 +7,6 @@ using Newtonsoft.Json.Linq;
 
 namespace RequestsNET
 {
-  internal static class Shared
-  {
-    internal static readonly HttpClient HTTPClient = new HttpClient(new HttpClientHandler { UseCookies = false });
-  }
-
   public static class Config
   {
     public static IRequestObserver DefaultObserver = new NullObserver();
