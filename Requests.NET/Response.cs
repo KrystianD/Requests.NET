@@ -29,6 +29,8 @@ namespace RequestsNET
       }
     }
 
+    public bool Is2XX => ((int)StatusCode / 100) == 2; 
+
     public string Text => _textCache;
     public JToken Json => _jsonCache;
     public XmlDocument Xml => _xmlCache;

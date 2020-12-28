@@ -16,8 +16,13 @@ namespace RequestsNET
 
   public class RequestFailedException : Exception
   {
-    public RequestFailedException(int code)
-        : base($"request failed with code: {code}") { }
+    public Response Response { get; }
+
+    public RequestFailedException(Response response)
+        : base($"Request failed with code: {(int)response.StatusCode}")
+    {
+      Response = response;
+    }
   }
 
   public class BaseRequestBuilder
@@ -37,7 +42,8 @@ namespace RequestsNET
                                           CancellationToken cancellationToken = default,
                                           IRequestObserver observer = null)
     {
-      var resp = await RequestExecutor.ExecuteAsync(RequestData, timeout, cancellationToken, observer);
+      var resp = await ExecuteAsync(timeout, cancellationToken, observer);
+      ValidateResponse(resp);
       if (resp.Data is null || resp.Data.Length == 0)
         throw new NoResponseException();
       return resp.ParseAsJson();
@@ -47,7 +53,8 @@ namespace RequestsNET
                                         CancellationToken cancellationToken = default,
                                         IRequestObserver observer = null)
     {
-      var resp = await RequestExecutor.ExecuteAsync(RequestData, timeout, cancellationToken, observer);
+      var resp = await ExecuteAsync(timeout, cancellationToken, observer);
+      ValidateResponse(resp);
       if (resp.Data is null || resp.Data.Length == 0)
         throw new NoResponseException();
       return resp.ParseAsJson().ToObject<T>(Utils.JsonDeserializer);
@@ -57,7 +64,8 @@ namespace RequestsNET
                                             CancellationToken cancellationToken = default,
                                             IRequestObserver observer = null)
     {
-      var resp = await RequestExecutor.ExecuteAsync(RequestData, timeout, cancellationToken, observer);
+      var resp = await ExecuteAsync(timeout, cancellationToken, observer);
+      ValidateResponse(resp);
       return resp.Data;
     }
 
@@ -65,8 +73,15 @@ namespace RequestsNET
                                           CancellationToken cancellationToken = default,
                                           IRequestObserver observer = null)
     {
-      var resp = await RequestExecutor.ExecuteAsync(RequestData, timeout, cancellationToken, observer);
+      var resp = await ExecuteAsync(timeout, cancellationToken, observer);
+      ValidateResponse(resp);
       return resp.ParseAsText();
+    }
+
+    private void ValidateResponse(Response resp)
+    {
+      if (!resp.Is2XX)
+        throw new RequestFailedException(resp);
     }
   }
 
