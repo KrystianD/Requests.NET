@@ -10,7 +10,7 @@ namespace RequestsNET.Tests
     {
       Assert.ThrowsAsync<RequestFailedException>(
           () => Requests.Get("http://localhost:9999/status/404")
-                        .ValidateRequest()
+                        .ValidateResponse()
                         .ExecuteAsync());
 
       Assert.ThrowsAsync<RequestFailedException>(

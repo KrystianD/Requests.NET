@@ -73,8 +73,8 @@ namespace RequestsNET
 
         observer.OnReceived(requestTag, requestData, request, stopwatch.Elapsed, resp);
 
-        if (requestData.ValidateRequest && !resp.Success)
-          throw new RequestFailedException(resp);
+        if (requestData.ValidateResponse)
+          resp.ValidateResponse();
 
         return resp;
       }

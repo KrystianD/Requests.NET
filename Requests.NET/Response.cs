@@ -115,5 +115,11 @@ namespace RequestsNET
           return $"<unknown:{ContentType}>";
       }
     }
+
+    public void ValidateResponse()
+    {
+      if (!Success)
+        throw new RequestFailedException(this);
+    }
   }
 }

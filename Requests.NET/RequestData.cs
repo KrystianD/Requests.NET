@@ -28,7 +28,7 @@ namespace RequestsNET
       public Stream Stream;
     }
 
-    public bool ValidateRequest = false;
+    public bool ValidateResponse = false;
 
     public HttpMethod Method;
     public string Url;

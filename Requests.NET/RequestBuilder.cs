@@ -44,7 +44,7 @@ namespace RequestsNET
                                           IRequestObserver observer = null)
     {
       var resp = await ExecuteAsync(timeout, cancellationToken, observer);
-      ValidateResponse(resp);
+      resp.ValidateResponse();
       if (resp.Data is null || resp.Data.Length == 0)
         throw new NoResponseException();
       return resp.ParseAsJson();
@@ -55,7 +55,7 @@ namespace RequestsNET
                                         IRequestObserver observer = null)
     {
       var resp = await ExecuteAsync(timeout, cancellationToken, observer);
-      ValidateResponse(resp);
+      resp.ValidateResponse();
       if (resp.Data is null || resp.Data.Length == 0)
         throw new NoResponseException();
       return resp.ParseAsJson().ToObject<T>(Utils.JsonDeserializer);
@@ -66,7 +66,7 @@ namespace RequestsNET
                                             IRequestObserver observer = null)
     {
       var resp = await ExecuteAsync(timeout, cancellationToken, observer);
-      ValidateResponse(resp);
+      resp.ValidateResponse();
       return resp.Data;
     }
 
@@ -75,14 +75,8 @@ namespace RequestsNET
                                           IRequestObserver observer = null)
     {
       var resp = await ExecuteAsync(timeout, cancellationToken, observer);
-      ValidateResponse(resp);
+      resp.ValidateResponse();
       return resp.ParseAsText();
-    }
-
-    private void ValidateResponse(Response resp)
-    {
-      if (!resp.Is2XX)
-        throw new RequestFailedException(resp);
     }
   }
 
@@ -96,7 +90,7 @@ namespace RequestsNET
 
     public RequestBuilder ValidateRequest()
     {
-      RequestData.ValidateRequest = true;
+      RequestData.ValidateResponse = true;
       return this;
     }
 
@@ -267,9 +261,9 @@ namespace RequestsNET
       RequestData.Url = url;
     }
 
-    public SendOnlyRequestBuilder ValidateRequest()
+    public SendOnlyRequestBuilder ValidateResponse()
     {
-      RequestData.ValidateRequest = true;
+      RequestData.ValidateResponse = true;
       return this;
     }
 
