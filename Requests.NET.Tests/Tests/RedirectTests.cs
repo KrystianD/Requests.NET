@@ -38,5 +38,14 @@ namespace RequestsNET.Tests
 
       Assert.AreEqual("http://localhost:9999/get", resp.Value<string>("url"));
     }
+
+    [Test]
+    public void FollowRedirectsError()
+    {
+      Assert.ThrowsAsync<RequestFailedException>(() => Requests.Get("http://localhost:9999/redirect-to")
+                                                               .Parameter("url", "http://localhost:9999/status/503")
+                                                               .FollowRedirects()
+                                                               .ToJsonAsync());
+    }
   }
 }
