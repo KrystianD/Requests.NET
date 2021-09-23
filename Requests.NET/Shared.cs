@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 
 namespace RequestsNET
@@ -9,6 +10,7 @@ namespace RequestsNET
 
     private sealed class EqualityComparer : IEqualityComparer<HttpClientConfig>
     {
+      [ExcludeFromCodeCoverage]
       public bool Equals(HttpClientConfig x, HttpClientConfig y)
       {
         if (ReferenceEquals(x, y)) return true;
@@ -18,6 +20,7 @@ namespace RequestsNET
         return x.FollowRedirects == y.FollowRedirects;
       }
 
+      [ExcludeFromCodeCoverage]
       public int GetHashCode(HttpClientConfig obj)
       {
         return obj.FollowRedirects.GetHashCode();
