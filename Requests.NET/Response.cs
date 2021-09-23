@@ -3,11 +3,13 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Xml;
+using JetBrains.Annotations;
 using Newtonsoft.Json.Linq;
 using Formatting = Newtonsoft.Json.Formatting;
 
 namespace RequestsNET
 {
+  [PublicAPI]
   public class Response
   {
     public HttpResponseMessage HttpResponse { get; }

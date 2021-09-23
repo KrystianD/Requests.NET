@@ -8,12 +8,14 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using Newtonsoft.Json.Linq;
 
 namespace RequestsNET
 {
   public class NoResponseException : Exception { }
 
+  [PublicAPI]
   public class RequestFailedException : Exception
   {
     public Response Response { get; }
