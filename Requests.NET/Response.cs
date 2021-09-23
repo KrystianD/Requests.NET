@@ -58,21 +58,16 @@ namespace RequestsNET
 
     public string ParseAsText()
     {
-      if (_textCache == null) {
-        var charset = HttpResponse.Content.Headers.ContentType?.CharSet;
-        _textCache = charset == null
-            ? Encoding.ASCII.GetString(Data)
-            : Encoding.GetEncoding(charset).GetString(Data);
-      }
+      if (_textCache == null)
+        _textCache = DecodeText(Encoding.ASCII);
 
       return _textCache;
     }
 
     public JToken ParseAsJson()
     {
-      if (_jsonCache == null) {
-        _jsonCache = Newtonsoft.Json.JsonConvert.DeserializeObject<JToken>(ParseAsText(), Utils.JsonDeserializerSettings);
-      }
+      if (_jsonCache == null)
+        _jsonCache = Newtonsoft.Json.JsonConvert.DeserializeObject<JToken>(DecodeText(Encoding.UTF8), Utils.JsonDeserializerSettings);
 
       return _jsonCache;
     }
@@ -116,6 +111,14 @@ namespace RequestsNET
     {
       if (!Success)
         throw new RequestFailedException(this);
+    }
+
+    private string DecodeText(Encoding defaultEncoding)
+    {
+      var charset = HttpResponse.Content.Headers.ContentType?.CharSet;
+      return charset == null
+          ? defaultEncoding.GetString(Data)
+          : Encoding.GetEncoding(charset).GetString(Data);
     }
   }
 }
