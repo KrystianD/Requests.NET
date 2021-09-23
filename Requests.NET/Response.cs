@@ -22,16 +22,10 @@ namespace RequestsNET
     public HttpStatusCode StatusCode => HttpResponse.StatusCode;
     public string ContentType => HttpResponse.Content?.Headers?.ContentType?.MediaType;
 
-    public bool Success
-    {
-      get
-      {
-        var codeGroup = (int)StatusCode / 100;
-        return codeGroup == 2 || codeGroup == 3;
-      }
-    }
+    public int StatusCodeGroup => (int)StatusCode / 100;
 
-    public bool Is2XX => ((int)StatusCode / 100) == 2; 
+    public bool Success => StatusCodeGroup == 2 || StatusCodeGroup == 3;
+    public bool Is2XX => StatusCodeGroup == 2;
 
     public string Text => _textCache;
     public JToken Json => _jsonCache;
