@@ -13,6 +13,7 @@ namespace RequestsNET.Tests
                                .ExecuteAsync();
 
       Assert.AreEqual(HttpStatusCode.OK, resp.StatusCode);
+      Assert.IsTrue(resp.Is2XX);
     }
 
     [Test]

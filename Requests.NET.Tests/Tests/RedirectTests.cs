@@ -26,6 +26,14 @@ namespace RequestsNET.Tests
 
       Assert.AreEqual(200, (int)resp.StatusCode);
       Assert.AreEqual("https://www.google.com/", resp.HttpResponse.RequestMessage.RequestUri.ToString());
+
+      resp = await Requests.Post("http://localhost:9999/redirect-to")
+                           .Parameter("url", "https://google.com")
+                           .FollowRedirects()
+                           .ExecuteAsync();
+
+      Assert.AreEqual(200, (int)resp.StatusCode);
+      Assert.AreEqual("https://www.google.com/", resp.HttpResponse.RequestMessage.RequestUri.ToString());
     }
 
     [Test]

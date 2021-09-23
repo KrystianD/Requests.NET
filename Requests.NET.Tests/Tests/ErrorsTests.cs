@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Net;
+using NUnit.Framework;
 
 namespace RequestsNET.Tests
 {
@@ -9,7 +10,17 @@ namespace RequestsNET.Tests
     {
       Assert.ThrowsAsync<RequestFailedException>(() => Requests.Post("http://localhost:9999/status/404").ToJsonAsync<string>());
       Assert.ThrowsAsync<RequestFailedException>(() => Requests.Post("http://localhost:9999/status/404").ToJsonAsync());
-      Assert.ThrowsAsync<RequestFailedException>(() => Requests.Post("http://localhost:9999/status/503").ToJsonAsync());
+      var e = Assert.ThrowsAsync<RequestFailedException>(() => Requests.Post("http://localhost:9999/status/503").ToJsonAsync());
+      
+      Assert.AreEqual(HttpStatusCode.ServiceUnavailable, e.Response.StatusCode);
+
+      Assert.ThrowsAsync<NoResponseException>(
+          () => Requests.Get("http://localhost:9999/bytes/0")
+                        .ToJsonAsync());
+
+      Assert.ThrowsAsync<NoResponseException>(
+          () => Requests.Get("http://localhost:9999/bytes/0")
+                        .ToJsonAsync<string>());
     }
   }
 }
