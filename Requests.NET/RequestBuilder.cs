@@ -90,7 +90,7 @@ namespace RequestsNET
       RequestData.Url = url;
     }
 
-    public RequestBuilder ValidateRequest()
+    public RequestBuilder ValidateResponse()
     {
       RequestData.ValidateResponse = true;
       return this;

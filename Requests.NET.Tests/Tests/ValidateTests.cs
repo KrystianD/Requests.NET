@@ -15,7 +15,7 @@ namespace RequestsNET.Tests
 
       Assert.ThrowsAsync<RequestFailedException>(
           () => Requests.Post("http://localhost:9999/status/404")
-                        .ValidateRequest()
+                        .ValidateResponse()
                         .ExecuteAsync());
     }
 
