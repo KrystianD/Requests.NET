@@ -7,27 +7,26 @@ namespace RequestsNET
   public class HttpClientConfig
   {
     public bool FollowRedirects;
+    public bool SkipCertificateValidation;
 
-    private sealed class EqualityComparer : IEqualityComparer<HttpClientConfig>
+    private sealed class HttpClientConfigEqualityComparer : IEqualityComparer<HttpClientConfig>
     {
-      [ExcludeFromCodeCoverage]
       public bool Equals(HttpClientConfig x, HttpClientConfig y)
       {
         if (ReferenceEquals(x, y)) return true;
         if (ReferenceEquals(x, null)) return false;
         if (ReferenceEquals(y, null)) return false;
         if (x.GetType() != y.GetType()) return false;
-        return x.FollowRedirects == y.FollowRedirects;
+        return x.FollowRedirects == y.FollowRedirects && x.SkipCertificateValidation == y.SkipCertificateValidation;
       }
 
-      [ExcludeFromCodeCoverage]
       public int GetHashCode(HttpClientConfig obj)
       {
-        return obj.FollowRedirects.GetHashCode();
+        unchecked { return (obj.FollowRedirects.GetHashCode() * 397) ^ obj.SkipCertificateValidation.GetHashCode(); }
       }
     }
 
-    public static IEqualityComparer<HttpClientConfig> Comparer { get; } = new EqualityComparer();
+    public static IEqualityComparer<HttpClientConfig> Comparer { get; } = new HttpClientConfigEqualityComparer();
   }
 
   internal static class Shared
@@ -44,6 +43,9 @@ namespace RequestsNET
             UseCookies = false,
             AllowAutoRedirect = config.FollowRedirects,
         };
+        if (config.SkipCertificateValidation)
+          handler.ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) => true;
+        
         client = new HttpClient(handler);
         _httpClients.Add(config, client);
         return client;

@@ -102,6 +102,12 @@ namespace RequestsNET
       return this;
     }
 
+    public RequestBuilder SkipCertificateValidation(bool skipCertificateValidation = true)
+    {
+      HttpConfig.SkipCertificateValidation = skipCertificateValidation;
+      return this;
+    }
+
     public RequestBuilder Header(string name, string value)
     {
       RequestData.Headers.Add(name, value);
@@ -272,6 +278,12 @@ namespace RequestsNET
     public SendOnlyRequestBuilder FollowRedirects(bool followRedirects = true)
     {
       HttpConfig.FollowRedirects = followRedirects;
+      return this;
+    }
+
+    public SendOnlyRequestBuilder SkipCertificateValidation(bool skipCertificateValidation = true)
+    {
+      HttpConfig.SkipCertificateValidation = skipCertificateValidation;
       return this;
     }
 
