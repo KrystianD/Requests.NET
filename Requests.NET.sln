@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Requests.NET", "Requests.NE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Requests.NET.Tests", "Requests.NET.Tests\Requests.NET.Tests.csproj", "{2BD2EAB2-74CA-4EC1-9152-D59BA91696EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Requests.NET.NLog", "Requests.NET.NLog\Requests.NET.NLog.csproj", "{1CD3CBA7-E524-4B25-A31C-730D232DC08D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{2BD2EAB2-74CA-4EC1-9152-D59BA91696EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BD2EAB2-74CA-4EC1-9152-D59BA91696EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2BD2EAB2-74CA-4EC1-9152-D59BA91696EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CD3CBA7-E524-4B25-A31C-730D232DC08D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CD3CBA7-E524-4B25-A31C-730D232DC08D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CD3CBA7-E524-4B25-A31C-730D232DC08D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CD3CBA7-E524-4B25-A31C-730D232DC08D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
