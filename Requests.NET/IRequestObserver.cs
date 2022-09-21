@@ -7,7 +7,7 @@ namespace RequestsNET
   {
     object CreateTag();
 
-    void BeforeSent(object tag,
+    void BeforeSend(object tag,
                     RequestData requestData,
                     HttpRequestMessage request);
 

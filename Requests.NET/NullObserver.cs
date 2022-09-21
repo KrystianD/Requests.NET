@@ -10,7 +10,7 @@ namespace RequestsNET
       return null;
     }
 
-    public void BeforeSent(object tag, RequestData requestData, HttpRequestMessage request) { }
+    public void BeforeSend(object tag, RequestData requestData, HttpRequestMessage request) { }
 
     public void OnSent(object tag, RequestData requestData, HttpRequestMessage request, TimeSpan elapsed) { }
 

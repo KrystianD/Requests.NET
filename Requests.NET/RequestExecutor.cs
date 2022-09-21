@@ -53,7 +53,7 @@ namespace RequestsNET
 
       // Observing
       var requestTag = observer.CreateTag();
-      observer.BeforeSent(requestTag, requestData, request);
+      observer.BeforeSend(requestTag, requestData, request);
 
       // Timeout
       var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
