@@ -62,6 +62,7 @@ namespace RequestsNET
 
       // Perform the request
       var stopwatch = Stopwatch.StartNew();
+      Response resp;
       try {
         var httpClient = Shared.GetHttpClient(httpClientConfig);
         var response = await httpClient.SendAsync(request, cts.Token).ConfigureAwait(false);
@@ -69,14 +70,9 @@ namespace RequestsNET
         observer.OnSent(requestTag, requestData, request, stopwatch.Elapsed);
 
         var respData = await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
-        var resp = new Response(response, respData);
+        resp = new Response(response, respData);
 
         observer.OnReceived(requestTag, requestData, request, stopwatch.Elapsed, resp);
-
-        if (requestData.ValidateResponse)
-          resp.ValidateResponse();
-
-        return resp;
       }
       catch (OperationCanceledException) when (!cancellationToken.IsCancellationRequested) {
         observer.OnTimeout(requestTag, requestData, request, stopwatch.Elapsed);
@@ -90,6 +86,11 @@ namespace RequestsNET
         observer.OnFailed(requestTag, requestData, request, stopwatch.Elapsed, e);
         throw;
       }
+
+      if (requestData.ValidateResponse)
+        resp.ValidateResponse();
+
+      return resp;
     }
 
     private static void SetupData(RequestData requestData, HttpRequestMessage request)
