@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using NUnit.Framework;
+using RequestsNET.Exceptions;
 
 namespace RequestsNET.Tests
 {

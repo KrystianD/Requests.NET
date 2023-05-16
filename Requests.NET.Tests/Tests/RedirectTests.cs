@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using NUnit.Framework;
+using RequestsNET.Exceptions;
 
 namespace RequestsNET.Tests
 {

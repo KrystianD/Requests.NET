@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml;
 using JetBrains.Annotations;
 using Newtonsoft.Json.Linq;
+using RequestsNET.Exceptions;
 using Formatting = Newtonsoft.Json.Formatting;
 
 namespace RequestsNET

@@ -8,25 +8,11 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using JetBrains.Annotations;
 using Newtonsoft.Json.Linq;
+using RequestsNET.Exceptions;
 
 namespace RequestsNET
 {
-  public class NoResponseException : Exception { }
-
-  [PublicAPI]
-  public class RequestFailedException : Exception
-  {
-    public Response Response { get; }
-
-    public RequestFailedException(Response response)
-        : base($"Request failed with code: {(int)response.StatusCode}")
-    {
-      Response = response;
-    }
-  }
-
   public class BaseRequestBuilder
   {
     protected readonly HttpClientConfig HttpConfig = new HttpClientConfig();
