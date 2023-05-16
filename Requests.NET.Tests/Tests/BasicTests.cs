@@ -26,6 +26,15 @@ namespace RequestsNET.Tests
     }
 
     [Test]
+    public async Task GetGzip()
+    {
+      var resp = await Requests.Get("http://localhost:9999/gzip")
+                               .ToJsonAsync<HttpBinResponse>();
+
+      Assert.AreEqual("http://localhost:9999/get", resp.Url);
+    }
+
+    [Test]
     public async Task Post()
     {
       var resp = await Requests.Post("http://localhost:9999/post")

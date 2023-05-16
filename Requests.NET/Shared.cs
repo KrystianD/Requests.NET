@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Net;
 using System.Net.Http;
 
 namespace RequestsNET
@@ -42,6 +43,7 @@ namespace RequestsNET
         var handler = new HttpClientHandler {
             UseCookies = false,
             AllowAutoRedirect = config.FollowRedirects,
+            AutomaticDecompression = DecompressionMethods.GZip,
         };
         if (config.SkipCertificateValidation)
           handler.ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) => true;
