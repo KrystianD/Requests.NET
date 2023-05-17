@@ -71,7 +71,13 @@ namespace RequestsNET
         observer.OnSent(requestTag, requestData, request, stopwatch.Elapsed);
 
         var respData = await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
-        resp = new Response(response, respData);
+        resp = new Response(response, respData, stopwatch.Elapsed);
+        try {
+          resp.ParseKnownTypes();
+        }
+        catch (Exception e) {
+          throw new ResponseProcessingException(resp, e);
+        }
 
         observer.OnReceived(requestTag, requestData, request, stopwatch.Elapsed, resp);
       }

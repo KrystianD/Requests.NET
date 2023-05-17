@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -15,6 +16,7 @@ namespace RequestsNET
   {
     public HttpResponseMessage HttpResponse { get; }
     public byte[] Data { get; }
+    public TimeSpan RequestDuration { get; }
 
     private string _textCache;
     private JToken _jsonCache;
@@ -32,11 +34,15 @@ namespace RequestsNET
     public JToken Json => _jsonCache;
     public XmlDocument Xml => _xmlCache;
 
-    public Response(HttpResponseMessage resp, byte[] data)
+    internal Response(HttpResponseMessage resp, byte[] data, TimeSpan requestDuration)
     {
       HttpResponse = resp;
       Data = data;
+      RequestDuration = requestDuration;
+    }
 
+    public void ParseKnownTypes()
+    {
       switch (ContentType) {
         case "application/json":
         case "application/vnd.api+json":
