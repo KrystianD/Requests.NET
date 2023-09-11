@@ -53,12 +53,14 @@ namespace RequestsNET.NLog
         Logger.Debug()
               .Message($"Request ({requestId}) to {method} {url} succeeded with code: {(int)resp.StatusCode} ({elapsedMs}ms)")
               .Property("request_id", requestId)
+              .Property("response_length", resp.Data.Length)
               .Property("response", Utils.LimitText(resp.FormatResponse(), 4000))
               .Write();
       }
       else {
         Logger.Warn()
               .Message($"Request ({requestId}) to {method} {url} failed with code: {(int)resp.StatusCode} ({elapsedMs}ms)")
+              .Property("response_length", resp.Data.Length)
               .Property("response", Utils.LimitText(resp.FormatResponse(), 4000))
               .Property("request_id", requestId)
               .Property("status_code", (int)resp.StatusCode)
