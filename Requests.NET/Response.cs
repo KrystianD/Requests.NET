@@ -49,6 +49,7 @@ namespace RequestsNET
           ParseAsJson();
           break;
 
+        case "text/xml":
         case "application/xml":
           ParseAsXml();
           break;
