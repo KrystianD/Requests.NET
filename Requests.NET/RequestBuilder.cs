@@ -102,7 +102,7 @@ namespace RequestsNET
 
     public RequestBuilder Header(HttpRequestHeader header, string value)
     {
-      RequestData.Headers.Add(header.ToString(), value);
+      RequestData.Headers.Add(Utils.GetHeaderName(header), value);
       return this;
     }
 
