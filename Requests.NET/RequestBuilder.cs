@@ -147,6 +147,12 @@ namespace RequestsNET
       return this;
     }
 
+    public RequestBuilder Proxy(string dsn)
+    {
+      HttpConfig.ProxyDsn = dsn;
+      return this;
+    }
+
     public RequestBuilder Parameter(string name, string value)
     {
       RequestData.Parameters.Add(name, value);
@@ -324,6 +330,12 @@ namespace RequestsNET
     public SendOnlyRequestBuilder Auth(AuthenticationHeaderValue auth)
     {
       RequestData.Auth = auth;
+      return this;
+    }
+
+    public SendOnlyRequestBuilder Proxy(string dsn)
+    {
+      HttpConfig.ProxyDsn = dsn;
       return this;
     }
 
