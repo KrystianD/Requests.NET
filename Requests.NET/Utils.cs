@@ -26,6 +26,24 @@ namespace RequestsNET
       return qb.ToString();
     }
 
+    public static void ParseUri(string uri, out string scheme, out string username, out string password,
+                                out string host, out int port, out string path)
+    {
+      int idx = uri.LastIndexOf('@');
+      if (idx != -1) {
+        uri = uri.Substring(0, idx).Replace("@", "___AT___") + uri.Substring(idx);
+      }
+
+      var u = new Uri(uri);
+
+      scheme = u.Scheme;
+      username = u.GetUsername()?.Replace("___AT___", "@");
+      password = u.GetPassword()?.Replace("___AT___", "@");
+      host = u.Host;
+      port = u.Port;
+      path = u.AbsolutePath;
+    }
+
     public static string GetHeaderName(HttpRequestHeader header)
     {
       // source: https://stackoverflow.com/questions/25574333/how-to-use-system-net-httprequestheader-enum-with-an-asp-net-request
@@ -48,6 +66,27 @@ namespace RequestsNET
       if (headerName.Length == 2)
         headerName = headerName.ToUpper();
       return headerName;
+    }
+  }
+
+  internal static class UriExtensions
+  {
+    public static string GetUsername(this Uri uri)
+    {
+      if (uri == null || string.IsNullOrWhiteSpace(uri.UserInfo))
+        return string.Empty;
+
+      var items = uri.UserInfo.Split(new[] { ':' });
+      return items.Length > 0 ? items[0] : string.Empty;
+    }
+
+    public static string GetPassword(this Uri uri)
+    {
+      if (uri == null || string.IsNullOrWhiteSpace(uri.UserInfo))
+        return string.Empty;
+
+      var items = uri.UserInfo.Split(new[] { ':' });
+      return items.Length > 1 ? items[1] : string.Empty;
     }
   }
 }
