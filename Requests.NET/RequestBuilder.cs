@@ -8,6 +8,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using Newtonsoft.Json.Linq;
 using RequestsNET.Exceptions;
 
@@ -68,6 +69,7 @@ namespace RequestsNET
     }
   }
 
+  [PublicAPI]
   public class RequestBuilder : BaseRequestBuilder
   {
     public RequestBuilder(HttpMethod method, string url)
@@ -247,6 +249,7 @@ namespace RequestsNET
     }
   }
 
+  [PublicAPI]
   public class SendOnlyRequestBuilder : BaseRequestBuilder
   {
     public SendOnlyRequestBuilder(HttpMethod method, string url)
