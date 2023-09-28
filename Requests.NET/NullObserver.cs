@@ -3,7 +3,7 @@ using System.Net.Http;
 
 namespace RequestsNET
 {
-  internal class NullObserver : IRequestObserver
+  public class NullObserver : IRequestObserver
   {
     public object CreateTag()
     {
