@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using JetBrains.Annotations;
 using Newtonsoft.Json.Linq;
@@ -12,111 +10,12 @@ using Newtonsoft.Json.Linq;
 namespace RequestsNET.Builders
 {
   [PublicAPI]
-  public class RequestBuilder : BaseRequestBuilder
+  public class RequestBuilder : BaseRequestBuilder<RequestBuilder>
   {
     public RequestBuilder(HttpMethod method, string url)
     {
       RequestData.Method = method;
       RequestData.Url = url;
-    }
-
-    public RequestBuilder ValidateResponse()
-    {
-      RequestData.ValidateResponse = true;
-      return this;
-    }
-
-    public RequestBuilder FollowRedirects(bool followRedirects = true)
-    {
-      HttpConfig.FollowRedirects = followRedirects;
-      return this;
-    }
-
-    public RequestBuilder SkipCertificateValidation(bool skipCertificateValidation = true)
-    {
-      HttpConfig.SkipCertificateValidation = skipCertificateValidation;
-      return this;
-    }
-
-    public RequestBuilder Header(string name, string value, bool validate = true)
-    {
-      if (validate)
-        RequestData.Headers.Add(name, value);
-      else
-        RequestData.Headers.TryAddWithoutValidation(name, value);
-      return this;
-    }
-
-    public RequestBuilder Header(HttpRequestHeader header, string value, bool validate = true)
-    {
-      if (validate)
-        RequestData.Headers.Add(header.ToString(), value);
-      else
-        RequestData.Headers.TryAddWithoutValidation(header.ToString(), value);
-      return this;
-    }
-
-    public RequestBuilder Header(IDictionary<string, string> headers, bool validate = true)
-    {
-      foreach (var keyValuePair in headers) {
-        if (validate)
-          RequestData.Headers.Add(keyValuePair.Key, keyValuePair.Value);
-        else
-          RequestData.Headers.TryAddWithoutValidation(keyValuePair.Key, keyValuePair.Value);
-      }
-
-      return this;
-    }
-
-    public RequestBuilder Cookie(string name, string value)
-    {
-      RequestData.Cookies[name] = value;
-      return this;
-    }
-
-    public RequestBuilder Cookie(IDictionary<string, string> cookies)
-    {
-      foreach (var keyValuePair in cookies)
-        RequestData.Cookies.Add(keyValuePair.Key, keyValuePair.Value);
-      return this;
-    }
-
-    public RequestBuilder AuthBasic(string user, string password)
-    {
-      var authB64 = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{user}:{password}"));
-      RequestData.Auth = new AuthenticationHeaderValue("Basic", authB64);
-      return this;
-    }
-
-    public RequestBuilder AuthBearer(string token)
-    {
-      RequestData.Auth = new AuthenticationHeaderValue("Bearer", token);
-      return this;
-    }
-
-    public RequestBuilder Auth(AuthenticationHeaderValue auth)
-    {
-      RequestData.Auth = auth;
-      return this;
-    }
-
-    public RequestBuilder Proxy(string dsn)
-    {
-      HttpConfig.ProxyDsn = dsn;
-      return this;
-    }
-
-    public RequestBuilder Parameter(string name, string value)
-    {
-      RequestData.Parameters.Add(name, value);
-      return this;
-    }
-
-    public RequestBuilder Parameter(IDictionary<string, string> parameters)
-    {
-      foreach (var keyValuePair in parameters)
-        RequestData.Parameters.Add(keyValuePair);
-      return this;
     }
 
     public RequestBuilder Form(string name, string value)
