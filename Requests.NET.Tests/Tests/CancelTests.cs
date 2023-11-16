@@ -11,14 +11,14 @@ namespace RequestsNET.Tests
     [Test]
     public async Task TimeoutTest()
     {
-      var resp = await Requests.GetAsync("http://localhost:9999/delay/1", timeout: TimeSpan.FromSeconds(2));
+      var resp = await Requests.Get("http://localhost:9999/delay/1").ExecuteAsync(TimeSpan.FromSeconds(2));
       Assert.AreEqual(HttpStatusCode.OK, resp.StatusCode);
 
       Assert.ThrowsAsync<TimeoutException>(
-          async () => await Requests.GetAsync("http://localhost:9999/delay/2", timeout: TimeSpan.FromSeconds(1)));
+          async () => await Requests.Get("http://localhost:9999/delay/2").ExecuteAsync(TimeSpan.FromSeconds(1)));
 
       Assert.ThrowsAsync<TimeoutException>(
-          async () => await Requests.GetAsync("http://localhost:9999/delay/2", timeout: TimeSpan.FromSeconds(1)));
+          async () => await Requests.Get("http://localhost:9999/delay/2").ExecuteAsync(TimeSpan.FromSeconds(1)));
     }
 
     [Test]
@@ -26,7 +26,7 @@ namespace RequestsNET.Tests
     {
       var cts = new CancellationTokenSource();
 
-      var resp2 = Requests.GetAsync("http://localhost:9999/delay/10", timeout: TimeSpan.FromSeconds(20), cancellationToken: cts.Token);
+      var resp2 = Requests.Get("http://localhost:9999/delay/10").ExecuteAsync(timeout: TimeSpan.FromSeconds(20), cancellationToken: cts.Token);
 
       cts.Cancel();
       await Task.Delay(100);
