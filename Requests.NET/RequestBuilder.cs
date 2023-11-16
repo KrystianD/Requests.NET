@@ -96,22 +96,33 @@ namespace RequestsNET
       return this;
     }
 
-    public RequestBuilder Header(string name, string value)
+    public RequestBuilder Header(string name, string value, bool validate = true)
     {
-      RequestData.Headers.Add(name, value);
+      if (validate)
+        RequestData.Headers.Add(name, value);
+      else
+        RequestData.Headers.TryAddWithoutValidation(name, value);
       return this;
     }
 
-    public RequestBuilder Header(HttpRequestHeader header, string value)
+    public RequestBuilder Header(HttpRequestHeader header, string value, bool validate = true)
     {
-      RequestData.Headers.Add(Utils.GetHeaderName(header), value);
+      if (validate)
+        RequestData.Headers.Add(header.ToString(), value);
+      else
+        RequestData.Headers.TryAddWithoutValidation(header.ToString(), value);
       return this;
     }
 
-    public RequestBuilder Header(IDictionary<string, string> headers)
+    public RequestBuilder Header(IDictionary<string, string> headers, bool validate = true)
     {
-      foreach (var keyValuePair in headers)
-        RequestData.Headers.Add(keyValuePair.Key, keyValuePair.Value);
+      foreach (var keyValuePair in headers) {
+        if (validate)
+          RequestData.Headers.Add(keyValuePair.Key, keyValuePair.Value);
+        else
+          RequestData.Headers.TryAddWithoutValidation(keyValuePair.Key, keyValuePair.Value);
+      }
+
       return this;
     }
 
@@ -282,22 +293,33 @@ namespace RequestsNET
       return this;
     }
 
-    public SendOnlyRequestBuilder Header(string name, string value)
+    public SendOnlyRequestBuilder Header(string name, string value, bool validate = true)
     {
-      RequestData.Headers.Add(name, value);
+      if (validate)
+        RequestData.Headers.Add(name, value);
+      else
+        RequestData.Headers.TryAddWithoutValidation(name, value);
       return this;
     }
 
-    public SendOnlyRequestBuilder Header(HttpRequestHeader header, string value)
+    public SendOnlyRequestBuilder Header(HttpRequestHeader header, string value, bool validate = true)
     {
-      RequestData.Headers.Add(header.ToString(), value);
+      if (validate)
+        RequestData.Headers.Add(header.ToString(), value);
+      else
+        RequestData.Headers.TryAddWithoutValidation(header.ToString(), value);
       return this;
     }
 
-    public SendOnlyRequestBuilder Header(IDictionary<string, string> headers)
+    public SendOnlyRequestBuilder Header(IDictionary<string, string> headers, bool validate = true)
     {
-      foreach (var keyValuePair in headers)
-        RequestData.Headers.Add(keyValuePair.Key, keyValuePair.Value);
+      foreach (var keyValuePair in headers) {
+        if (validate)
+          RequestData.Headers.Add(keyValuePair.Key, keyValuePair.Value);
+        else
+          RequestData.Headers.TryAddWithoutValidation(keyValuePair.Key, keyValuePair.Value);
+      }
+
       return this;
     }
 

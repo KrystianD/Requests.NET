@@ -23,8 +23,10 @@ namespace RequestsNET
       request.Headers.Authorization = requestData.Auth;
 
       // Headers
-      foreach (var keyValuePair in requestData.Headers.AsEnumerable())
-        request.Headers.Add(keyValuePair.Key, keyValuePair.Value);
+      foreach (var keyValuePair in requestData.Headers.AsEnumerable()) {
+        // validation is performed in the builder
+        request.Headers.TryAddWithoutValidation(keyValuePair.Key, keyValuePair.Value);
+      }
 
       // Cookies
       if (requestData.Cookies.Count > 0) {
