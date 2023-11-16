@@ -4,7 +4,7 @@
         <TargetFramework>netstandard2.1</TargetFramework>
         <RootNamespace>RequestsNET</RootNamespace>
         <LangVersion>8</LangVersion>
-        <Version>0.1.23</Version>
+        <Version>0.1.25</Version>
 
         <Title>Requests.NET</Title>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
