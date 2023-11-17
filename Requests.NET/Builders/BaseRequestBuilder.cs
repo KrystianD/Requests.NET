@@ -137,15 +137,15 @@ namespace RequestsNET.Builders
       return resp.ParseAsJson();
     }
 
-    public async Task<T> ToJsonAsync<T>(TimeSpan? timeout = null,
-                                        CancellationToken cancellationToken = default,
-                                        IRequestObserver observer = null)
+    public async Task<TObj> ToJsonAsync<TObj>(TimeSpan? timeout = null,
+                                              CancellationToken cancellationToken = default,
+                                              IRequestObserver observer = null)
     {
       var resp = await ExecuteAsync(timeout, cancellationToken, observer);
       resp.ValidateResponse();
       if (resp.Data is null || resp.Data.Length == 0)
         throw new NoResponseException();
-      return resp.ParseAsJson().ToObject<T>(Utils.JsonDeserializer);
+      return resp.ParseAsJson().ToObject<TObj>(jsonSerializer ?? Utils.JsonDeserializer);
     }
 
     public async Task<byte[]> ToBinaryAsync(TimeSpan? timeout = null,
