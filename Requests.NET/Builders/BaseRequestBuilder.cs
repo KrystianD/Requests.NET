@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RequestsNET.Exceptions;
 
@@ -139,7 +140,8 @@ namespace RequestsNET.Builders
 
     public async Task<TObj> ToJsonAsync<TObj>(TimeSpan? timeout = null,
                                               CancellationToken cancellationToken = default,
-                                              IRequestObserver observer = null)
+                                              IRequestObserver observer = null,
+                                              JsonSerializer? jsonSerializer = null)
     {
       var resp = await ExecuteAsync(timeout, cancellationToken, observer);
       resp.ValidateResponse();
