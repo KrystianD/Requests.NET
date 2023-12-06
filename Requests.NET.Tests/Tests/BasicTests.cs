@@ -30,8 +30,8 @@ namespace RequestsNET.Tests
     {
       var resp = await Requests.Get("http://localhost:9999/gzip")
                                .ToJsonAsync<HttpBinResponse>();
-
-      Assert.AreEqual("http://localhost:9999/get", resp.Url);
+      
+      Assert.IsTrue(resp.Gzipped);
     }
 
     [Test]

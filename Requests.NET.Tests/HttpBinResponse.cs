@@ -29,5 +29,8 @@ namespace RequestsNET.Tests
 
     [JsonProperty("url")]
     public string Url;
+
+    [JsonProperty("gzipped")]
+    public bool Gzipped;
   }
 }

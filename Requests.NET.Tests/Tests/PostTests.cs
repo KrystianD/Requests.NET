@@ -28,6 +28,7 @@ namespace RequestsNET.Tests
               ["Host"] = "localhost:9999",
               ["Content-Length"] = "7",
               ["Content-Type"] = "application/x-www-form-urlencoded",
+              ["Accept-Encoding"] = "gzip",
           },
           resp.Headers);
     }
@@ -54,6 +55,7 @@ namespace RequestsNET.Tests
               ["Host"] = "localhost:9999",
               ["Content-Length"] = "3",
               ["Content-Type"] = "text/custom",
+              ["Accept-Encoding"] = "gzip",
           },
           resp.Headers);
     }
@@ -72,6 +74,7 @@ namespace RequestsNET.Tests
               ["Host"] = "localhost:9999",
               ["Content-Length"] = "3",
               ["Content-Type"] = "text/plain; charset=utf-8",
+              ["Accept-Encoding"] = "gzip",
           },
           resp.Headers);
     }
@@ -90,6 +93,7 @@ namespace RequestsNET.Tests
               ["Host"] = "localhost:9999",
               ["Content-Length"] = "12",
               ["Content-Type"] = "text/plain; charset=utf-32",
+              ["Accept-Encoding"] = "gzip",
           },
           resp.Headers);
     }
@@ -106,6 +110,7 @@ namespace RequestsNET.Tests
               ["Host"] = "localhost:9999",
               ["Content-Length"] = "3",
               ["Content-Type"] = "text/custom; charset=utf-8",
+              ["Accept-Encoding"] = "gzip",
           },
           resp.Headers);
     }
@@ -130,6 +135,7 @@ namespace RequestsNET.Tests
               ["Host"] = "localhost:9999",
               ["Content-Length"] = "12",
               ["Content-Type"] = "application/json; charset=utf-8",
+              ["Accept-Encoding"] = "gzip",
           },
           resp.Headers);
     }
@@ -146,6 +152,7 @@ namespace RequestsNET.Tests
               ["Host"] = "localhost:9999",
               ["Content-Length"] = "12",
               ["Content-Type"] = "text/custom; charset=utf-8",
+              ["Accept-Encoding"] = "gzip",
           },
           resp.Headers);
     }

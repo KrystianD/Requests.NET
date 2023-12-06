@@ -18,6 +18,7 @@ namespace RequestsNET.Tests
           new Dictionary<string, string>() {
               ["Host"] = "localhost:9999",
               ["X-Custom"] = "value1",
+              ["Accept-Encoding"] = "gzip",
           },
           resp.Headers);
 
@@ -30,6 +31,7 @@ namespace RequestsNET.Tests
               ["Host"] = "localhost:9999",
               ["Content-Length"] = "0",
               ["X-Custom"] = "value1",
+              ["Accept-Encoding"] = "gzip",
           },
           resp.Headers);
     }
@@ -44,6 +46,7 @@ namespace RequestsNET.Tests
       CollectionAssert.AreEquivalent(
           new Dictionary<string, string>() {
               ["Host"] = "test.com",
+              ["Accept-Encoding"] = "gzip",
           },
           resp.Headers);
 
@@ -55,6 +58,7 @@ namespace RequestsNET.Tests
           new Dictionary<string, string>() {
               ["Host"] = "test.com",
               ["Content-Length"] = "0",
+              ["Accept-Encoding"] = "gzip",
           },
           resp.Headers);
     }
@@ -74,6 +78,7 @@ namespace RequestsNET.Tests
               ["Host"] = "localhost:9999",
               ["X-Custom1"] = "value1",
               ["X-Custom2"] = "value2",
+              ["Accept-Encoding"] = "gzip",
           },
           resp.Headers);
 
@@ -90,6 +95,7 @@ namespace RequestsNET.Tests
               ["Content-Length"] = "0",
               ["X-Custom1"] = "value1",
               ["X-Custom2"] = "value2",
+              ["Accept-Encoding"] = "gzip",
           },
           resp.Headers);
     }
@@ -106,6 +112,7 @@ namespace RequestsNET.Tests
           new Dictionary<string, string>() {
               ["Host"] = "localhost:9999",
               ["X-Custom"] = "value1, value2",
+              ["Accept-Encoding"] = "gzip",
           },
           resp.Headers);
 
@@ -119,6 +126,7 @@ namespace RequestsNET.Tests
               ["Host"] = "localhost:9999",
               ["Content-Length"] = "0",
               ["X-Custom"] = "value1, value2",
+              ["Accept-Encoding"] = "gzip",
           },
           resp.Headers);
     }

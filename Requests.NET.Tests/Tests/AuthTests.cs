@@ -19,6 +19,7 @@ namespace RequestsNET.Tests
           new Dictionary<string, string>() {
               ["Host"] = "localhost:9999",
               ["Authorization"] = "Basic dXNlcjpwYXNz",
+              ["Accept-Encoding"] = "gzip",
           },
           resp.Headers);
     }
@@ -34,6 +35,7 @@ namespace RequestsNET.Tests
           new Dictionary<string, string>() {
               ["Host"] = "localhost:9999",
               ["Authorization"] = "Bearer token",
+              ["Accept-Encoding"] = "gzip",
           },
           resp.Headers);
     }
@@ -49,6 +51,7 @@ namespace RequestsNET.Tests
           new Dictionary<string, string>() {
               ["Host"] = "localhost:9999",
               ["Authorization"] = "scheme param",
+              ["Accept-Encoding"] = "gzip",
           },
           resp.Headers);
 
@@ -61,6 +64,7 @@ namespace RequestsNET.Tests
               ["Host"] = "localhost:9999",
               ["Content-Length"] = "0",
               ["Authorization"] = "scheme param",
+              ["Accept-Encoding"] = "gzip",
           },
           resp.Headers);
     }
