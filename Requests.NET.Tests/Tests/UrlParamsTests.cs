@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
 namespace RequestsNET.Tests
@@ -72,6 +74,52 @@ namespace RequestsNET.Tests
               ["a"] = "b",
               ["c"] = "d",
               ["e"] = "f",
+          },
+          resp.Args);
+    }
+
+    [Test]
+    public void GetParamsDuplicate()
+    {
+      Assert.Throws<ArgumentException>(() => {
+        Requests.Get("http://localhost:9999/get")
+                .Parameter("a", "val1")
+                .Parameter("a", "val2");
+      });
+
+      Assert.Throws<ArgumentException>(() => {
+        Requests.Get("http://localhost:9999/get")
+                .Parameter("a[]", "val1")
+                .Parameter("a[]", "val2");
+      });
+    }
+
+    [Test]
+    public async Task GetParamsArray()
+    {
+      var resp = await Requests.Get("http://localhost:9999/get")
+                               .ParameterArray("a", new[] { "val1", "val2" })
+                               .ToJsonAsync<HttpBinResponse>();
+
+      Assert.AreEqual("http://localhost:9999/get?a=val1&a=val2", resp.Url);
+      CollectionAssert.AreEquivalent(
+          new Dictionary<string, object>() {
+              ["a"] = JToken.FromObject(new[] { "val1", "val2" }),
+          },
+          resp.Args);
+    }
+
+    [Test]
+    public async Task GetParamsArrayWithBrackets()
+    {
+      var resp = await Requests.Get("http://localhost:9999/get")
+                               .ParameterArray("a[]", new[] { "val1", "val2" })
+                               .ToJsonAsync<HttpBinResponse>();
+
+      Assert.AreEqual("http://localhost:9999/get?a[]=val1&a[]=val2", resp.Url);
+      CollectionAssert.AreEquivalent(
+          new Dictionary<string, object>() {
+              ["a[]"] = JToken.FromObject(new[] { "val1", "val2" }),
           },
           resp.Args);
     }

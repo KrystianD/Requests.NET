@@ -7,7 +7,7 @@ namespace RequestsNET.Tests
   public class HttpBinResponse
   {
     [JsonProperty("args")]
-    public Dictionary<string, string> Args;
+    public Dictionary<string, object> Args;
 
     [JsonProperty("data")]
     public string Data;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -115,6 +116,12 @@ namespace RequestsNET.Builders
     {
       foreach (var keyValuePair in parameters)
         RequestData.Parameters.Add(keyValuePair);
+      return (T)this;
+    }
+
+    public T ParameterArray(string name, IEnumerable<string> value)
+    {
+      RequestData.ParametersArrays.Add(new KeyValuePair<string, List<string>>(name, value.ToList()));
       return (T)this;
     }
 

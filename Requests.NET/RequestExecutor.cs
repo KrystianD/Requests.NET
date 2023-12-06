@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -16,7 +17,20 @@ namespace RequestsNET
   {
     public static HttpRequestMessage BuildRequest(RequestData requestData)
     {
-      var finalUrl = Utils.ExtendUrl(requestData.Url, requestData.Parameters);
+      var qs = HttpUtility.ParseQueryString(new Uri(requestData.Url).Query);
+      foreach (var (key, value) in requestData.Parameters)
+        qs.Add(key, value);
+      foreach (var (key, values) in requestData.ParametersArrays)
+      foreach (var value in values)
+        qs.Add(key, value);
+
+      var qb = new UriBuilder(requestData.Url) {
+          Query = qs.ToString()!,
+      };
+      if (qb.Uri.IsDefaultPort)
+        qb.Port = -1;
+      var finalUrl = qb.ToString();
+
       var request = new HttpRequestMessage(requestData.Method, finalUrl);
 
       // Authorization
