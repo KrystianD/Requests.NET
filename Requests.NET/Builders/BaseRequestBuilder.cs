@@ -114,14 +114,14 @@ namespace RequestsNET.Builders
 
     public T Parameter(IDictionary<string, string> parameters)
     {
-      foreach (var keyValuePair in parameters)
-        RequestData.Parameters.Add(keyValuePair);
+      foreach (var (key, value) in parameters)
+        RequestData.Parameters.Add(key, value);
       return (T)this;
     }
 
     public T ParameterArray(string name, IEnumerable<string> value)
     {
-      RequestData.ParametersArrays.Add(new KeyValuePair<string, List<string>>(name, value.ToList()));
+      RequestData.Parameters.Add(name, value.ToList());
       return (T)this;
     }
 

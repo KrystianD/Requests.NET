@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -18,11 +19,27 @@ namespace RequestsNET
     public static HttpRequestMessage BuildRequest(RequestData requestData)
     {
       var qs = HttpUtility.ParseQueryString(new Uri(requestData.Url).Query);
-      foreach (var (key, value) in requestData.Parameters)
-        qs.Add(key, value);
-      foreach (var (key, values) in requestData.ParametersArrays)
-      foreach (var value in values)
-        qs.Add(key, value);
+      foreach (var (key, value) in requestData.Parameters) {
+        switch (value) {
+          case string valueStr:
+            qs.Add(key, valueStr);
+            break;
+          case IList valuesList:
+          {
+            foreach (var item in valuesList) {
+              switch (item) {
+                case string itemStr:
+                  qs.Add(key, itemStr);
+                  break;
+                default: throw new ArgumentException("invalid parameter type");
+              }
+            }
+
+            break;
+          }
+          default: throw new ArgumentException("invalid parameter type");
+        }
+      }
 
       var qb = new UriBuilder(requestData.Url) {
           Query = qs.ToString()!,
